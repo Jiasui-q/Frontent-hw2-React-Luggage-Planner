@@ -334,9 +334,9 @@
         </p>
 
         <p>
-          It’s okay if you’re finding that you don’t already know everything you
-          need to know to complete the assignment. Practice is the best way to
-          become proficient!
+          It’s okay if you’re finding that you don’t already know, before
+          starting, everything you need to know to complete the assignment.
+          Practice is the best way to become proficient!
         </p>
 
         <h3>Developing the application</h3>
@@ -670,7 +670,9 @@
           something like this:
         </p>
 
-        <button>Toggle Basic Economy</button>
+        <div style="margin-left: 2rem">
+          <button>Toggle Basic Economy</button>
+        </div>
 
         <p>
           Now, how do we make it so that clicking this button can control the
@@ -765,12 +767,11 @@
         <p>What’s the problem here?</p>
 
         <p>
-          The state isn‘t very visible to the user! Although the interactivity
-          works, it’s not clear whether Basic Economy is currently active or
-          not.
+          The state isn‘t visible to the user! Although the interactivity works,
+          it’s not clear whether Basic Economy is currently active or not.
         </p>
 
-        <p>One thing we could do is make the state more visible to the user:</p>
+        <p>One thing we could do is actively render the state into the page:</p>
 
         <pre
           style="margin-left: 2rem"
@@ -797,7 +798,8 @@ if (basicEconomy) {
 
         <p>
           But we’re reinventing the wheel a bit here... aren’t there already
-          togglable components that communicate their current state?
+          well-designed togglable components that communicate their current
+          state?
         </p>
 
         <h3>Controlled components</h3>
@@ -815,8 +817,12 @@ if (basicEconomy) {
           (including a <code>label</code> ensures that the browser knows that
           this text is associated with the form control, which is great for
           accessibility; it will also make it so that clicking on the text
-          toggles the checkbox.)
+          toggles the checkbox. See below:)
         </p>
+
+        <div style="margin-left: 2rem">
+          <label>Basic economy: <input type="checkbox" /></label>
+        </div>
 
         <p>
           If you add this to your page, you’ll see the checkbox. It will even be
@@ -838,6 +844,14 @@ if (basicEconomy) {
           whatever the <code>checked</code> prop is set to).
         </p>
 
+        <div style="margin-left: 2rem">
+          <!-- this is not React! just good, ol'-fashioned inline javascript. -->
+          <label
+            >Basic economy:
+            <input type="checkbox" checked onchange="this.checked = true;"
+          /></label>
+        </div>
+
         <p>
           To make the checkbox interactive again, we need to
           <strong>use the state variable</strong> as the value for the
@@ -848,6 +862,15 @@ if (basicEconomy) {
             href="https://react.dev/reference/react-dom/components/input#my-checkbox-doesnt-update-when-i-click-on-it"
             >shown here in the React docs</a
           >.
+        </p>
+
+        <p>
+          Even if we change the state variable for some other reason (say, the
+          user chose some other option that is incompatible with Basic Economy,
+          so we set the state variable to
+          <code>false</code>
+          ), this technique will update the checkbox whenever the state changes.
+          The change doesn’t only need to come from the user clicking the box.
         </p>
 
         <p>
@@ -995,7 +1018,7 @@ if (basicEconomy) {
           so that we can use their values.
         </p>
 
-        <h3>Putting arrays in state</h3>
+        <h3>Arrays in state variables</h3>
 
         <p>
           Placing arrays in state can be trickier than simpler values like
@@ -1068,8 +1091,11 @@ if (basicEconomy) {
         </p>
 
         <h3>Checklist</h3>
-        
-        <p>See above. Make sure to verify that you’ve implemented each bullet point!</p>
+
+        <p>
+          See above. Make sure to verify that you’ve implemented each bullet
+          point!
+        </p>
       </section>
 
       <section id="Part_4">
@@ -1146,8 +1172,14 @@ if (basicEconomy) {
 
         <ul>
           <li>A new page (Summary) is linked in the sidebar.</li>
-          <li>Navigating between pages does not lose information about which items have been added to bags.</li>
-          <li>The Summary page includes the total weight of all items in all bags, updating as the user updates the contents of the bags.</li>
+          <li>
+            Navigating between pages does not lose information about which items
+            have been added to bags.
+          </li>
+          <li>
+            The Summary page includes the total weight of all items in all bags,
+            updating as the user updates the contents of the bags.
+          </li>
         </ul>
       </section>
 
@@ -1167,7 +1199,26 @@ if (basicEconomy) {
 
         <h3>New features</h3>
 
-        <p>Some example features you might try including:</p>
+        <p>Here’s a list of features we will award points for:</p>
+
+        <strong>1 point each</strong>
+        <ul>
+          <li>
+            Add a “quantity” field so that users can specify how many of a
+            particular item to add
+          </li>
+          <li>
+            Add the ability to save and load bags from local storage, so that
+            the program state is not lost when the page reloads
+          </li>
+          <li>Make the sidebar show the currently-selected page</li>
+          <li>
+            Use React Context (or a state management library like Zustand) to
+            manage state across components
+          </li>
+        </ul>
+
+        <strong>2 points each</strong>
 
         <ul>
           <li>
@@ -1184,38 +1235,22 @@ if (basicEconomy) {
             </li>
           </ul>
           <li>
-            Add a “quantity” field so that users can specify how many of a
-            particular item to add
-          </li>
-          <li>
             Add inline editing features so that users can change the name or
             weight of an item without deleting and re-adding it
           </li>
           <li>
-            Add the ability to save and load bags from local storage, so that
-            the program state is not lost when the page reloads
-          </li>
-          <li>Add additional insights to the Summary page</li>
-          <li>Make the sidebar show the currently-selected page</li>
-          <li>
             Use React Router or another technique to show different URLs in the
-            browser title bar depending on the selected page
+            browser URL bar depending on the selected page
           </li>
-          <li>Anything else you can think of to improve the application!</li>
+          <li>
+            Add more insights to the Summary page, with some kind of useful
+            visual — consider using a library like Plotly or Chart.js!
+          </li>
         </ul>
 
         <p>
-          You can earn up to 6 points for adding extra features. Some features
-          (like the sidebar highlight) will be worth less (maybe 1 point, in
-          that case) than features that have additional technical complexity.
-        </p>
-
-        <p>
-          Since you have freedom in this assignment, grading will be subjective.
-          As a rule of thumb, our plan is to grade so that, according to our
-          judgment, earning the full 6 points would require spending about as
-          much time on additional features as you spent on completing the
-          required functionality.
+          You can earn <strong>up to 6 points</strong> for adding extra
+          features.
         </p>
 
         <p>
